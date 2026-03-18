@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
 
     const ai = new GoogleGenAI({ apiKey });
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: "gemini-3.1-flash-lite-preview",
       contents: `${SYSTEM_PROMPT}\n\nNormal human thought: ${text}\n\nLinkedIn Lunatic post:`,
     });
 
