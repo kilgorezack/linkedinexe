@@ -22,11 +22,11 @@ export default function Home() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: input }),
       });
-      if (!res.ok) throw new Error("Translation failed");
       const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Translation failed");
       setOutput(data.result);
-    } catch {
-      setError("Something went wrong. Please try again.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }

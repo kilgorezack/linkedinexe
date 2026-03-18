@@ -1,8 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-
 const SYSTEM_PROMPT = `You are the LinkedIn Lunatic Translator. Transform normal human thoughts into maximally cringey, inspirational LinkedIn posts.
 
 Rules:
@@ -20,12 +18,18 @@ Rules:
 Return ONLY the LinkedIn post text, no commentary.`;
 
 export async function POST(req: NextRequest) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    return NextResponse.json({ error: "GEMINI_API_KEY is not configured" }, { status: 500 });
+  }
+
   try {
     const { text } = await req.json();
     if (!text?.trim()) {
       return NextResponse.json({ error: "No text provided" }, { status: 400 });
     }
 
+    const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     const result = await model.generateContent([
       SYSTEM_PROMPT,
@@ -34,7 +38,8 @@ export async function POST(req: NextRequest) {
     const response = result.response.text();
     return NextResponse.json({ result: response });
   } catch (err) {
-    console.error(err);
-    return NextResponse.json({ error: "Translation failed" }, { status: 500 });
+    const message = err instanceof Error ? err.message : "Unknown error";
+    console.error("Translate error:", message);
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
