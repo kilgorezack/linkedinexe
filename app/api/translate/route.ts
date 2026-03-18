@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 import { NextRequest, NextResponse } from "next/server";
 
 const SYSTEM_PROMPT = `You are the LinkedIn Lunatic Translator. Transform normal human thoughts into maximally cringey, inspirational LinkedIn posts.
@@ -29,14 +29,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "No text provided" }, { status: 400 });
     }
 
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-04-17" });
-    const result = await model.generateContent([
-      SYSTEM_PROMPT,
-      `\nNormal human thought: ${text}\n\nLinkedIn Lunatic post:`,
-    ]);
-    const response = result.response.text();
-    return NextResponse.json({ result: response });
+    const ai = new GoogleGenAI({ apiKey });
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: `${SYSTEM_PROMPT}\n\nNormal human thought: ${text}\n\nLinkedIn Lunatic post:`,
+    });
+
+    return NextResponse.json({ result: response.text });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
     console.error("Translate error:", message);
