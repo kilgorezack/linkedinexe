@@ -43,7 +43,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-surface">
       {/* Header */}
       <header className="bg-surface sticky top-0 z-50 border-b border-slate-100">
-        <div className="flex justify-between items-center px-6 py-3 w-full max-w-7xl mx-auto">
+        <div className="flex justify-between items-center px-4 sm:px-6 py-3 w-full max-w-7xl mx-auto">
           <div className="flex items-center gap-3">
             <span className="material-symbols-outlined text-primary-container text-3xl">translate</span>
             <span className="font-headline font-extrabold text-primary-container text-2xl tracking-tight">LinkedIn.exe</span>
@@ -91,7 +91,7 @@ export default function Home() {
       </nav>
 
       {/* Main Content */}
-      <main className="flex-grow max-w-7xl mx-auto w-full px-4 py-8 md:py-12 pb-32 md:pb-20">
+      <main className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 py-6 md:py-10 pb-32 md:pb-24">
         {/* Language Selector */}
         <div className="bg-white rounded-t-2xl flex items-center overflow-x-auto">
           <div className="flex items-center min-w-max px-4">
@@ -115,15 +115,15 @@ export default function Home() {
         {/* Translation Panels */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-outline-variant/20 border-x border-b border-slate-100/50 rounded-b-2xl overflow-hidden shadow-sm">
           {/* Input */}
-          <div className="bg-white p-6 flex flex-col min-h-[320px]">
+          <div className="bg-white p-4 sm:p-6 flex flex-col min-h-[45vh] md:min-h-[50vh]">
             <textarea
-              className="w-full flex-grow border-none focus:ring-0 text-xl md:text-2xl text-on-surface placeholder-on-surface-variant/30 resize-none font-body bg-transparent outline-none"
+              className="w-full flex-grow border-none focus:ring-0 text-lg sm:text-xl md:text-2xl text-on-surface placeholder-on-surface-variant/30 resize-none font-body bg-transparent outline-none"
               placeholder="What are you thinking?"
               value={input}
               maxLength={MAX_CHARS}
               onChange={(e) => setInput(e.target.value)}
             />
-            <div className="mt-auto flex justify-between items-center pt-4">
+            <div className="mt-auto flex justify-between items-center pt-3">
               <div className="flex gap-1">
                 <button className="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
                   <span className="material-symbols-outlined">mic</span>
@@ -132,14 +132,24 @@ export default function Home() {
                   <span className="material-symbols-outlined">volume_up</span>
                 </button>
               </div>
-              <span className="text-xs text-on-surface-variant font-label">
-                {input.length} / {MAX_CHARS}
-              </span>
+              <div className="flex items-center gap-3">
+                <span className="text-xs text-on-surface-variant font-label">
+                  {input.length} / {MAX_CHARS}
+                </span>
+                <button
+                  onClick={translate}
+                  disabled={!input.trim() || loading}
+                  className="px-4 py-1.5 rounded-full text-sm font-semibold text-white transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-110 active:scale-95"
+                  style={{ background: "linear-gradient(135deg, #005bbf, #1a73e8)" }}
+                >
+                  {loading ? "..." : "Translate"}
+                </button>
+              </div>
             </div>
           </div>
 
           {/* Output */}
-          <div className="bg-surface-container-low/50 p-6 flex flex-col min-h-[320px]">
+          <div className="bg-surface-container-low/50 p-4 sm:p-6 flex flex-col min-h-[45vh] md:min-h-[50vh]">
             <div className="flex-grow">
               {loading ? (
                 <div className="flex items-center gap-3 text-on-surface-variant">
@@ -188,9 +198,9 @@ export default function Home() {
         </div>
 
         {/* Bento CTA Section */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="mt-8 md:mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
           <div
-            className="md:col-span-2 p-8 rounded-[2rem] text-white flex flex-col justify-between overflow-hidden relative"
+            className="md:col-span-2 p-6 md:p-8 rounded-[2rem] text-white flex flex-col justify-between overflow-hidden relative"
             style={{ background: "linear-gradient(135deg, #005bbf, #1a73e8)" }}
           >
             <div className="relative z-10">
@@ -211,7 +221,7 @@ export default function Home() {
             <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
           </div>
 
-          <div className="bg-secondary-container p-8 rounded-[2rem] flex flex-col items-center justify-center text-center">
+          <div className="bg-secondary-container p-6 md:p-8 rounded-[2rem] flex flex-col items-center justify-center text-center">
             <span className="material-symbols-outlined material-symbols-filled text-on-secondary-container text-5xl mb-4" style={{ fontVariationSettings: "'FILL' 1" }}>
               auto_awesome
             </span>
