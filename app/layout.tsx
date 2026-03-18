@@ -17,7 +17,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "LingoIn | The LinkedIn Lunatic Translator",
+  title: "LinkedIn.exe | The LinkedIn Lunatic Translator",
   description: "Transform your normal human thoughts into maximally disruptive LinkedIn content.",
 };
 

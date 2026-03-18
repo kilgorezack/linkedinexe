@@ -46,7 +46,7 @@ export default function Home() {
         <div className="flex justify-between items-center px-6 py-3 w-full max-w-7xl mx-auto">
           <div className="flex items-center gap-3">
             <span className="material-symbols-outlined text-primary-container text-3xl">translate</span>
-            <span className="font-headline font-extrabold text-primary-container text-2xl tracking-tight">LingoIn</span>
+            <span className="font-headline font-extrabold text-primary-container text-2xl tracking-tight">LinkedIn.exe</span>
           </div>
           <div className="flex items-center gap-4">
             <div className="hidden md:flex items-center bg-surface-container-low rounded-full px-4 py-2 text-on-surface-variant">
@@ -232,7 +232,7 @@ export default function Home() {
             </a>
           ))}
           <div className="w-full text-center mt-2">
-            <p className="font-label text-xs tracking-wide text-on-surface-variant/60">© 2024 LingoIn Corporation</p>
+            <p className="font-label text-xs tracking-wide text-on-surface-variant/60">© 2024 LinkedIn.exe Corporation</p>
           </div>
         </div>
       </footer>
