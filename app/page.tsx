@@ -22,9 +22,14 @@ export default function Home() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: input }),
       });
-      const data = await res.json();
+      let data: { result?: string; error?: string };
+      try {
+        data = await res.json();
+      } catch {
+        throw new Error("Unexpected response from server. A network proxy or firewall may be blocking the request.");
+      }
       if (!res.ok) throw new Error(data.error || "Translation failed");
-      setOutput(data.result);
+      setOutput(data.result ?? "");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
