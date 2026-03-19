@@ -247,7 +247,7 @@ export default function Home() {
             </a>
           ))}
           <div className="w-full text-center mt-2">
-            <p className="font-label text-xs tracking-wide text-on-surface-variant/60">© 2024 LinkedIn.exe Corporation</p>
+            <p className="font-label text-xs tracking-wide text-on-surface-variant/60">© 2026 <a href="https://www.summitlabs.one/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-container transition-colors">Summit Labs</a></p>
           </div>
         </div>
       </footer>
